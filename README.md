@@ -18,7 +18,7 @@ You can add the rateit gem into your Gemfile
 
 	rails g rateit User
 
-The generator takes one argument which is the name of your existing UserModelName. This is necessary to bind the user and rating datas.
+The generator takes one argument which is the name of your existing devise user model UserModelName. This is necessary to bind the user and rating datas.
 Also the generator copies necessary files (jquery raty plugin files, star icons and javascripts)
 
 Example: 
@@ -37,7 +37,7 @@ I suppose you have a car model
 
 	rails g model car name:string
 
-You should add the rateit_rateable function with its dimension option.
+You should add the rateit_rateable function with its dimensions option.
 
 	class Car < ActiveRecord::Base
 		rateit_rateable :dimensions => [:speed, :engine, :price]
@@ -46,7 +46,7 @@ You should add the rateit_rateable function with its dimension option.
 Then you need to add a call rateit_rater in the user model. 
 
 	class User < ActiveRecord::Base
-		ratme_rater
+		rateit_rater
 	end   
 	
 	
