@@ -1,8 +1,7 @@
+require 'active_support/concern'
 module Rateit
+  extend ActiveSupport::Concern
   
-  def self.included(base)
-    base.extend ClassMethods               
-  end
 
   def rate(stars, user_id, dimension=nil)
     if can_rate? user_id, dimension
@@ -74,7 +73,7 @@ module Rateit
       has_many :ratings_given, :class_name => "Rate", :foreign_key => :rater_id       
     end    
     
-    def rateit_rateable(*options)
+    def rateit_rateable(*dimensions)
       has_many :rates_without_dimension, :as => :rateable, :class_name => "Rate", :dependent => :destroy, :conditions => {:dimension => nil}
       has_many :raters_without_dimension, :through => :rates_without_dimension, :source => :rater  
       
@@ -82,7 +81,7 @@ module Rateit
               :dependent => :destroy, :conditions => {:dimension => nil}
       
 
-      options.each do |dimension|        
+      dimensions.each do |dimension|        
         has_many "#{dimension}_rates", :dependent => :destroy, 
                                        :conditions => {:dimension => dimension.to_s}, 
                                        :class_name => "Rate", 
