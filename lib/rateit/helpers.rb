@@ -12,15 +12,14 @@ module Helpers
     else
       avg = klass.avg
     end
-     
-    if options[:start].present?
-      content_tag :div, "", "data-dimension" => dimension, :class => "star", "data-rating" => avg, 
-                            "data-id" => rateable_obj.id, "data-classname" => rateable_obj.class.name,
-                            "data-star-count" => options[:star]           
-    else
-      content_tag :div, "", "data-dimension" => dimension, :class => "star", "data-rating" => avg, 
-                            "data-id" => rateable_obj.id, "data-classname" => rateable_obj.class.name
-    end
+    
+    star = options[:star] || 5
+    
+    content_tag :div, "", "data-dimension" => dimension, :class => "star", "data-rating" => avg, 
+                          "data-id" => rateable_obj.id, "data-classname" => rateable_obj.class.name,
+                          "data-star-count" => star           
+    
+    
   end
      
 end
