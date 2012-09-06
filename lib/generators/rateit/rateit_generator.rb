@@ -6,7 +6,7 @@ class RateitGenerator < Rails::Generators::NamedBase
                                                        
   desc "copying jquery.raty files to assets directory ..."
   def copying
-    copy_file 'jquery.raty.min.js', 'app/assets/javascripts/jquery.raty.min.js'
+    copy_file 'jquery.raty.js', 'app/assets/javascripts/jquery.raty.js'
     copy_file 'star-on.png', 'app/assets/images/star-on.png'
     copy_file 'star-off.png', 'app/assets/images/star-off.png'
     copy_file 'star-half.png', 'app/assets/images/star-half.png'

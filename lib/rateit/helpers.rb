@@ -13,9 +13,14 @@ module Helpers
       avg = klass.avg
     end
      
-    content_tag :div, "", "data-dimension" => dimension, :class => "star", "data-rating" => avg, 
-                          "data-id" => rateable_obj.id, "data-classname" => rateable_obj.class.name,
-                          "data-star-count" => options[:star]            
+    if options[:start].present?
+      content_tag :div, "", "data-dimension" => dimension, :class => "star", "data-rating" => avg, 
+                            "data-id" => rateable_obj.id, "data-classname" => rateable_obj.class.name,
+                            "data-star-count" => options[:star]           
+    else
+      content_tag :div, "", "data-dimension" => dimension, :class => "star", "data-rating" => avg, 
+                            "data-id" => rateable_obj.id, "data-classname" => rateable_obj.class.name
+    end
   end
      
 end
