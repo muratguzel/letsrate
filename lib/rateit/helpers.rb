@@ -14,7 +14,8 @@ module Helpers
     end
      
     content_tag :div, "", "data-dimension" => dimension, :class => "star", "data-rating" => avg, 
-                          "data-id" => rateable_obj.id, "data-classname" => rateable_obj.class.name            
+                          "data-id" => rateable_obj.id, "data-classname" => rateable_obj.class.name,
+                          "data-star-count" => options[:star]            
   end
      
 end
