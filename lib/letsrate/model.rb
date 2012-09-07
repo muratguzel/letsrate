@@ -1,8 +1,7 @@
 require 'active_support/concern'
-module Rateit
+module Letsrate
   extend ActiveSupport::Concern
   
-
   def rate(stars, user_id, dimension=nil)
     if can_rate? user_id, dimension
       rates(dimension).build do |r|
@@ -25,7 +24,7 @@ module Rateit
         avg.qty = 1
         avg.dimension = dimension
         avg.save!
-      end               
+      end                     
     else
       a = average(dimension)
       a.avg = (a.avg + stars) / (a.qty+1)
@@ -48,7 +47,7 @@ module Rateit
       true
     else
       false
-    end      
+    end         
   end    
   
   def rates(dimension=nil)
@@ -69,11 +68,11 @@ module Rateit
 
   module ClassMethods
     
-    def rateit_rater
+    def letsrate_rater
       has_many :ratings_given, :class_name => "Rate", :foreign_key => :rater_id       
     end    
     
-    def rateit_rateable(*dimensions)
+    def letsrate_rateable(*dimensions)
       has_many :rates_without_dimension, :as => :rateable, :class_name => "Rate", :dependent => :destroy, :conditions => {:dimension => nil}
       has_many :raters_without_dimension, :through => :rates_without_dimension, :source => :rater  
       
@@ -98,5 +97,5 @@ module Rateit
 end        
 
 class ActiveRecord::Base
-  include Rateit
+  include Letsrate
 end

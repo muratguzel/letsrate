@@ -1,17 +1,17 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "rateit/version"
+require "letsrate/version"
 
 Gem::Specification.new do |s|
-  s.name        = "rateit"
-  s.version     = Rateit::VERSION
+  s.name        = "letsrate"
+  s.version     = Letsrate::VERSION
   s.authors     = ["Murat GUZEL"]
   s.email       = ["guzelmurat@gmail.com"]
   s.homepage    = ""
   s.summary     = %q{Provides the best solution to add rating functionality to your models.}
   s.description = %q{Provides the best solution to add rating functionality to your models.}
 
-  s.rubyforge_project = "rateit"
+  s.rubyforge_project = "letsrate"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
