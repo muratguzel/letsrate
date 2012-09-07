@@ -1,5 +1,5 @@
 require 'rails/generators/migration'
-class RateitGenerator < Rails::Generators::NamedBase
+class LestrateGenerator < Rails::Generators::NamedBase
   include Rails::Generators::Migration
   
   source_root File.expand_path('../templates', __FILE__)      
@@ -10,7 +10,7 @@ class RateitGenerator < Rails::Generators::NamedBase
     copy_file 'star-on.png', 'app/assets/images/star-on.png'
     copy_file 'star-off.png', 'app/assets/images/star-off.png'
     copy_file 'star-half.png', 'app/assets/images/star-half.png'
-    copy_file 'rateit.js', 'app/assets/javascripts/rateit.js.erb'
+    copy_file 'letsrate.js', 'app/assets/javascripts/letsrate.js.erb'
     copy_file 'rater_controller.rb', 'app/controllers/rater_controller.rb'
   end         
   

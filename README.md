@@ -1,22 +1,22 @@
-# Rateit Rating Gem  
+# Letsrate Rating Gem  
 
 Provides the best way to add rating capabilites to your Rails application with jQuery Raty plugin.
 
 ## Repository
 
-Find it at [github.com/muratguzel/rateit](github.com/muratguzel/rateit)
+Find it at [github.com/muratguzel/letsrate](github.com/muratguzel/letsrate)
 
 ## Instructions
 
 ### Install
 
-You can add the rateit gem into your Gemfile
+You can add the letsrate gem into your Gemfile
 
-	gem 'rateit'
+	gem 'letsrate'
 	
 ### Generate
 
-	rails g rateit User
+	rails g letsrate User
 
 The generator takes one argument which is the name of your existing devise user model UserModelName. This is necessary to bind the user and rating datas.
 Also the generator copies necessary files (jquery raty plugin files, star icons and javascripts)
@@ -27,7 +27,7 @@ Suppose you will have a devise user model which name is User. The generator shou
 
 	rails g devise:install
 	rails g devise user
-	rails g rateit user # => This is rateit generator. 
+	rails g letsrate user # => This is letsrate generator. 
    
 This generator will create Rate and RatingCache models and link to your user model. 
 
@@ -37,16 +37,16 @@ I suppose you have a car model
 
 	rails g model car name:string
 
-You should add the rateit_rateable function with its dimensions option.
+You should add the letsrate_rateable function with its dimensions option.
 
 	class Car < ActiveRecord::Base
-		rateit_rateable :dimensions => [:speed, :engine, :price]
+		letsrate_rateable :dimensions => [:speed, :engine, :price]
 	end                                                         
 	
-Then you need to add a call rateit_rater in the user model. 
+Then you need to add a call letsrate_rater in the user model. 
 
 	class User < ActiveRecord::Base
-		rateit_rater
+		letsrate_rater
 	end   
 	
 	
@@ -84,6 +84,6 @@ as you will.
 	end   
      
 ## Feedback
-If you find bugs please open a ticket at [github.com/muratguzel/rateit/issues](github.com/muratguzel/rateit/issues)
+If you find bugs please open a ticket at [github.com/muratguzel/letsrate/issues](github.com/muratguzel/letsrate/issues)
 	
 	
