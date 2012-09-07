@@ -94,6 +94,6 @@ as you will.
 	end   
      
 ## Feedback
-If you find bugs please open a ticket at [github.com/muratguzel/letsrate/issues](github.com/muratguzel/letsrate/issues)
+If you find bugs please open a ticket at [htt://github.com/muratguzel/letsrate/issues](http://github.com/muratguzel/letsrate/issues)
 	
 	
