@@ -1,5 +1,5 @@
 require 'rails/generators/migration'
-class LestrateGenerator < Rails::Generators::NamedBase
+class LetsrateGenerator < Rails::Generators::NamedBase
   include Rails::Generators::Migration
   
   source_root File.expand_path('../templates', __FILE__)      
