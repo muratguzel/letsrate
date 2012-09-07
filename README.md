@@ -1,6 +1,7 @@
 # Letsrate Rating Gem  
 
 Provides the best way to add rating capabilites to your Rails application with jQuery Raty plugin.
+[![Build Status](https://secure.travis-ci.org/muratguzel/letsrate.png)](http://travis-ci.org/muratguzel/letsrate)
 
 ## Repository
 
