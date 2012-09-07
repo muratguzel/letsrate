@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Letsrate::VERSION
   s.authors     = ["Murat GUZEL"]
   s.email       = ["guzelmurat@gmail.com"]
-  s.homepage    = ""
+  s.homepage    = "http://github.com/muratguzel/letsrate"
   s.summary     = %q{Provides the best solution to add rating functionality to your models.}
   s.description = %q{Provides the best solution to add rating functionality to your models.}
 
