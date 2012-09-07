@@ -1,3 +1,3 @@
 module Letsrate
-  VERSION = "1.0.6.alpha"
+  VERSION = "1.0.7"
 end
