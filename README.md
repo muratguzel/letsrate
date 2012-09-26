@@ -7,7 +7,7 @@ Provides the best way to add rating capabilites to your Rails application with j
 
 ## Repository
 
-Find it at [github.com/muratguzel/letsrate](github.com/muratguzel/letsrate)
+Find it at [github.com/muratguzel/letsrate](https://github.com/muratguzel/letsrate)
 
 ## Instructions
 
