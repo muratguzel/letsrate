@@ -27,7 +27,7 @@ module Letsrate
       end                     
     else
       a = average(dimension)
-      a.avg = (a.avg + stars) / (a.qty+1)
+      a.avg = (a.avg*a.qty + stars) / (a.qty+1)
       a.qty = a.qty + 1
       a.save!
     end   
