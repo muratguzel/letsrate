@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rateme (1.0.3)
+    letsrate (1.0.8)
 
 GEM
   remote: http://rubygems.org/
@@ -61,4 +61,4 @@ PLATFORMS
 
 DEPENDENCIES
   jquery-rails
-  rateme!
+  letsrate!
