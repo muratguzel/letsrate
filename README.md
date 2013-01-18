@@ -87,29 +87,6 @@ Speed : <%= rating_for @car, "engine", :star => 7 %>
 Speed : <%= rating_for @car, "price" %>
 ```
 
-### Important
-
-By default rating_for tries to call devise current_user method as the rater instance in the rater_controller.rb file. You can change the current_user method
-as you will.
-
-```ruby
-#rater_controller.rb
-
-def create
-  if current_user.present?
-    obj = eval "#{params[:klass]}.find(#{params[:id]})"
-    if params[:dimension].present?
-      obj.rate params[:score].to_i, current_user.id, "#{params[:dimension]}"
-    else
-      obj.rate params[:score].to_i, current_user.id
-    end
-
-    render :json => true
-  else
-    render :json => false
-  end
-end
-```
 
 ## Feedback
 If you find bugs please open a ticket at [https://github.com/muratguzel/letsrate/issues](https://github.com/muratguzel/letsrate/issues)
