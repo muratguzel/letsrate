@@ -1,5 +1,6 @@
 require 'rails/generators/migration'
-class LetsrateGenerator < Rails::Generators::NamedBase
+require 'rails/generators/active_record'
+class LetsrateGenerator < ActiveRecord::Generators::Base
   include Rails::Generators::Migration
   
   source_root File.expand_path('../templates', __FILE__)      
@@ -35,15 +36,5 @@ class LetsrateGenerator < Rails::Generators::NamedBase
   desc "migration is creating ..."
   def create_migration
     migration_template "migration.rb", "db/migrate/create_rates.rb"    
-  end   
-  
-  
-  private 
-  def self.next_migration_number(dirname)
-    if ActiveRecord::Base.timestamped_migrations
-      Time.now.utc.strftime("%Y%m%d%H%M%S%L")
-    else
-      "%.3d" % (current_migration_number(dirname) + 1)
-    end    
   end
 end
