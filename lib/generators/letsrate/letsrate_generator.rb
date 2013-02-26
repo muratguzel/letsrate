@@ -1,6 +1,6 @@
 require 'rails/generators/migration'
-require 'rails/generators/active_model'
-class LetsrateGenerator < Rails::Generators::NamedBase
+require 'rails/generators/active_record'
+class LetsrateGenerator < ActiveRecord::Generators::Base
   include Rails::Generators::Migration
   
   source_root File.expand_path('../templates', __FILE__)      
@@ -36,13 +36,5 @@ class LetsrateGenerator < Rails::Generators::NamedBase
   desc "migration is creating ..."
   def create_migration
     migration_template "migration.rb", "db/migrate/create_rates.rb"    
-  end   
-  
-  
-  private
-  # Implement the required interface for Rails::Generators::Migration.
-  def self.next_migration_number(dirname)
-    next_migration_number = current_migration_number(dirname) + 1
-    ActiveRecord::Migration.next_migration_number(next_migration_number)
   end
 end
