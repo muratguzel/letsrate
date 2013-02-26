@@ -1,4 +1,5 @@
 require 'rails/generators/migration'
+require 'rails/generators/active_model'
 class LetsrateGenerator < Rails::Generators::NamedBase
   include Rails::Generators::Migration
   
@@ -38,12 +39,10 @@ class LetsrateGenerator < Rails::Generators::NamedBase
   end   
   
   
-  private 
+  private
+  # Implement the required interface for Rails::Generators::Migration.
   def self.next_migration_number(dirname)
-    if ActiveRecord::Base.timestamped_migrations
-      Time.now.utc.strftime("%Y%m%d%H%M%S%L")
-    else
-      "%.3d" % (current_migration_number(dirname) + 1)
-    end    
+    next_migration_number = current_migration_number(dirname) + 1
+    ActiveRecord::Migration.next_migration_number(next_migration_number)
   end
 end
