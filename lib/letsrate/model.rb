@@ -18,7 +18,8 @@ module Letsrate
   end 
   
   def update_rate_average(stars, dimension=nil)
-    rating_cache = RatingCache.where(:cacheable_id => self.id,:cacheable_type => self.class.name,:dimension => dimension).first_or_create
+    rating_cache_properties = {:cacheable_id => self.id,:cacheable_type => self.class.name,:dimension => dimension}
+    rating_cache = RatingCache.where(rating_cache_properties).first || RatingCache.new(rating_cache_properties)
     all_rates = Rate.where(:rateable_id => self.id, :rateable_type => self.class.name, :dimension => dimension)
     rating_cache.qty = all_rates.count
     rating_cache.avg = all_rates.map(&:stars).sum.to_f / rating_cache.qty
