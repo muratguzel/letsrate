@@ -70,6 +70,7 @@ module Letsrate
   module ClassMethods
     
     def letsrate_rater
+      attr_accessible :stars
       has_many :ratings_given, :class_name => "Rate", :foreign_key => :rater_id       
     end    
     
