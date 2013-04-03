@@ -4,7 +4,6 @@ module Letsrate
   extend ActiveSupport::Concern
   
   def rate(stars, user_id, dimension=nil, rate_id)
-    flag = nil
     if can_rate? user_id, dimension
       rates(dimension).build do |r|
         r.stars = stars
@@ -13,13 +12,14 @@ module Letsrate
       end      
     else
       #raise "User has already rated."
-      Rate.where(rater_id: user_id, dimension: dimension, rateable_id: rate_id).first.update_attributes(stars: stars)
-      flag = true
+      rate = Rate.where(rater_id: user_id, dimension: dimension, rateable_id: rate_id).first
+      old_stars = rate.stars
+      rate.update_attributes(stars: stars)
     end
-    update_rate_average(stars, dimension, flag)
+    update_rate_average(stars, dimension, old_stars)
   end 
   
-  def update_rate_average(stars, dimension=nil, flag)
+  def update_rate_average(stars, dimension=nil, old_stars)
     if average(dimension).nil?
       RatingCache.create do |avg|
         avg.cacheable_id = self.id
@@ -31,13 +31,12 @@ module Letsrate
       end                     
     else
       a = average(dimension)
-      if flag
-        qty = a.qty
+      if old_stars
+        a.avg = (a.avg*a.qty + (stars - old_stars)) / (a.qty)
       else
-        qty = a.qty + 1
+        a.avg = (a.avg*a.qty + stars) / (a.qty+1)
+        a.qty = a.qty + 1
       end
-      a.avg = (a.avg*a.qty + stars) / (qty)
-      a.qty = qty
       a.save!
     end   
   end                               
