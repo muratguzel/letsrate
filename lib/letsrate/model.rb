@@ -2,17 +2,18 @@ require 'active_support/concern'
 module Letsrate
   extend ActiveSupport::Concern
   
-  def rate(stars, user_id, dimension=nil)
+  def rate(stars, user_id, rate_id,  dimension=nil)
     if can_rate? user_id, dimension
       rates(dimension).build do |r|
         r.stars = stars
         r.rater_id = user_id
         r.save!          
       end      
-      update_rate_average(stars, dimension)
     else
-      raise "User has already rated."                       
+      #raise "User has already rated."
+      Rate.where(rater_id: user_id, dimension: dimension, rateable_id: rate_id).first.update_attributes(stars: stars)
     end
+    update_rate_average(stars, dimension)
   end 
   
   def update_rate_average(stars, dimension=nil)
