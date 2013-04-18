@@ -81,14 +81,14 @@ module Letsrate
       
 
       dimensions.each do |dimension|        
-        has_many "#{dimension}_rates", :dependent => :destroy, 
+        has_many :"#{dimension}_rates", :dependent => :destroy, 
                                        :conditions => {:dimension => dimension.to_s}, 
                                        :class_name => "Rate", 
                                        :as => :rateable
                                        
-        has_many "#{dimension}_raters", :through => "#{dimension}_rates", :source => :rater         
+        has_many :"#{dimension}_raters", :through => "#{dimension}_rates", :source => :rater         
         
-        has_one "#{dimension}_average", :as => :cacheable, :class_name => "RatingCache", 
+        has_one :"#{dimension}_average", :as => :cacheable, :class_name => "RatingCache", 
                                         :dependent => :destroy, :conditions => {:dimension => dimension.to_s}
       end                                                    
     end
