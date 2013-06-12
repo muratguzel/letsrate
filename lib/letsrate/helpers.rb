@@ -30,10 +30,10 @@ module Helpers
   end
   
   def rating_for_user(rateable_obj, rating_user, dimension = nil, options = {})
-    @product = rateable_obj
+    @object = rateable_obj
     @user = rating_user
-	  @rating = Rate.find_by_rater_id_and_rateable_id_and_dimension(@user.id, @product.id, dimension)
-	  stars = @rating.stars
+	  @rating = Rate.find_by_rater_id_and_rateable_id_and_dimension(@user.id, @object.id, dimension)
+	  stars = @rating ? @rating.stars : 0
 
     disable_after_rate = options[:disable_after_rate] || false
     
