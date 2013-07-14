@@ -28,7 +28,7 @@ module Letsrate
     else
       a = average(dimension)
       a.qty = rates(dimension).count
-      a.avg = a.qty / raters(dimension).count
+      a.avg = rates(dimension).average(:stars)
       a.save!(validate: false)
     end
   end
