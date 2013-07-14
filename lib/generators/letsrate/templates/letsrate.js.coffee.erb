@@ -1,0 +1,36 @@
+$.fn.raty.defaults.path = "/assets"
+$.fn.raty.defaults.half_show = true
+$ ->
+  $(".star").css opacity: "0.35"
+  $(".star").hover (->
+    $(this).css opacity: "1"
+  ), ->
+    $(this).css opacity: "0.35"
+
+  $(".star").raty
+    half: true,
+    readOnly: ->
+      $(this).data("readonly") == 'true'
+
+    score: ->
+      $(this).data "rating"
+
+    number: ->
+      $(this).data "star-count"
+
+    click: (score, evt) ->
+      el = $(this)
+
+      $.post "<%= Rails.application.class.routes.url_helpers.rate_path %>",
+
+        score: score
+        dimension: $(this).data("dimension")
+        id: $(this).data("id")
+        klass: $(this).data("classname")
+      , (data) ->
+        if el.attr('data-disable-after-rate') == 'true'
+          el.raty('readOnly', true)
+
+        data
+
+  undefined
