@@ -2,12 +2,13 @@ require 'active_support/concern'
 module Letsrate
   extend ActiveSupport::Concern
 
-  def rate(stars, user_id, dimension=nil)
-    if can_rate? user_id, dimension
-      rates(dimension).build do |r|
+  def rate(stars, user, dimension=nil)
+    dimension = nil if dimension.blank?
+
+    if can_rate? user, dimension
+      rates(dimension).create! do |r|
         r.stars = stars
-        r.rater_id = user_id
-        r.save!
+        r.rater = user
       end
       update_rate_average(stars, dimension)
     else
@@ -17,53 +18,35 @@ module Letsrate
 
   def update_rate_average(stars, dimension=nil)
     if average(dimension).nil?
-      RatingCache.create do |avg|
+      RatingCache.create! do |avg|
         avg.cacheable_id = self.id
         avg.cacheable_type = self.class.name
         avg.avg = stars
         avg.qty = 1
         avg.dimension = dimension
-        avg.save!
       end
     else
       a = average(dimension)
-      a.avg = (a.avg*a.qty + stars) / (a.qty+1)
-      a.qty = a.qty + 1
-      a.save!
+      a.qty = rates(dimension).count
+      a.avg = a.qty / raters(dimension).count
+      a.save!(validate: false)
     end
   end
 
   def average(dimension=nil)
-    if dimension.nil?
-      self.send "rate_average_without_dimension"
-    else
-      self.send "#{dimension}_average"
-    end
+    dimension ?  self.send("#{dimension}_average") : rate_average_without_dimension
   end
 
-  def can_rate?(user_id, dimension=nil)
-    val = self.connection.select_value("select count(*) as cnt from rates where rateable_id=#{self.id} and rateable_type='#{self.class.name}' and rater_id=#{user_id} and dimension='#{dimension}'").to_i
-    if val == 0
-      true
-    else
-      false
-    end
+  def can_rate?(user, dimension=nil)
+    user.ratings_given.where(dimension: dimension, rateable_id: id, rateable_type: self.class.name).size.zero?
   end
 
   def rates(dimension=nil)
-    if dimension.nil?
-      self.send "rates_without_dimension"
-    else
-      self.send "#{dimension}_rates"
-    end
+    dimension ? self.send("#{dimension}_rates") : rates_without_dimension
   end
 
   def raters(dimension=nil)
-    if dimension.nil?
-      self.send "raters_without_dimension"
-    else
-      self.send "#{dimension}_raters"
-    end
+    dimension ? self.send("#{dimension}_raters") : raters_without_dimension
   end
 
   module ClassMethods

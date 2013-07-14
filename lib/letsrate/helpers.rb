@@ -1,17 +1,9 @@
 module Helpers
   def rating_for(rateable_obj, dimension=nil, options={})
 
-    if dimension.nil?
-      klass = rateable_obj.average
-    else
-      klass = rateable_obj.average "#{dimension}"
-    end
+    cached_average = rateable_obj.average dimension
 
-    if klass.nil?
-      avg = 0
-    else
-      avg = klass.avg
-    end
+    avg = cached_average ? cached_average.avg : 0
 
     star = options[:star] || 5
 
@@ -19,7 +11,7 @@ module Helpers
 
     readonly = false
     if disable_after_rate
-      readonly = current_user.present? ? !rateable_obj.can_rate?(current_user.id, dimension) : true
+      readonly = current_user ? !rateable_obj.can_rate?(current_user, dimension) : true
     end
 
     content_tag :div, '', "data-dimension" => dimension, :class => "star", "data-rating" => avg,
