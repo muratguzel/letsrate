@@ -6,10 +6,11 @@ module Letsrate
     dimension = nil if dimension.blank?
 
     if can_rate? user, dimension
-      rates(dimension).create! do |r|
+      user_rate = rates(dimension).where(rater_id: user.id).first_or_initialize do |r|
         r.stars = stars
         r.rater = user
       end
+      user_rate.save!
       update_rate_average(stars, dimension)
     else
       raise "User has already rated."
@@ -38,6 +39,7 @@ module Letsrate
   end
 
   def can_rate?(user, dimension=nil)
+    @@allow_rerating and return true
     user.ratings_given.where(dimension: dimension, rateable_id: id, rateable_type: self.class.name).size.zero?
   end
 
@@ -55,7 +57,9 @@ module Letsrate
       has_many :ratings_given, :class_name => "Rate", :foreign_key => :rater_id
     end
 
-    def letsrate_rateable(*dimensions)
+    def letsrate_rateable(*dimensions, allow_rerating: false)
+      @@allow_rerating = allow_rerating
+
       has_many :rates_without_dimension, :as => :rateable, :class_name => "Rate", :dependent => :destroy, :conditions => {:dimension => nil}
       has_many :raters_without_dimension, :through => :rates_without_dimension, :source => :rater
 
