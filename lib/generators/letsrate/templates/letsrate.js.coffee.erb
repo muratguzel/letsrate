@@ -7,10 +7,10 @@ $ ->
   ), ->
     $(this).css opacity: "0.35"
 
+  $is_readonly = $(".star").data("readonly")
   $(".star").raty
     half: true,
-    readOnly: ->
-      $(this).data("readonly") == 'true'
+    readOnly: $is_readonly
 
     score: ->
       $(this).data "rating"
