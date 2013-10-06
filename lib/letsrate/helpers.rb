@@ -7,7 +7,11 @@ module Helpers
 
     star = options[:star] || 5
 
-    disable_after_rate = options[:disable_after_rate] || true
+    if options[:disable_after_rate] == false
+	    disable_after_rate = false
+    else
+	    disable_after_rate = true
+    end
 
     readonly = !(current_user && rateable_obj.can_rate?(current_user, dimension))
 

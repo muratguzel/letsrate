@@ -58,6 +58,14 @@ class Car < ActiveRecord::Base
 end
 ```
 
+Additionally you can use letsrate_rerateable to let raters to change their vote.
+
+```ruby
+class Car < ActiveRecord::Base
+  letsrate_rerateable "speed", "engine", "price"
+end
+```
+
 Then you need to add a call letsrate_rater in the user model.
 
 ```ruby
