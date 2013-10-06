@@ -59,9 +59,7 @@ module Letsrate
       has_many :ratings_given, :class_name => "Rate", :foreign_key => :rater_id
     end
 
-    def letsrate_rateable(*dimensions, allow_rerating: false)
-      @@allow_rerating = allow_rerating
-
+    def letsrate_rateable(*dimensions)
       has_many :rates_without_dimension, :as => :rateable, :class_name => "Rate", :dependent => :destroy, :conditions => {:dimension => nil}
       has_many :raters_without_dimension, :through => :rates_without_dimension, :source => :rater
 
@@ -82,8 +80,13 @@ module Letsrate
       end
     end
 
+    def letsrate_rerateable(*dimensions)
+      @@allow_rerating = true
+      letsrate_rateable(*dimensions)
+    end
+
     def allow_rerating?
-      @@allow_rerating
+      @@allow_rerating || false
     end
   end
 
