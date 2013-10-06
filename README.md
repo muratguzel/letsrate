@@ -58,11 +58,11 @@ class Car < ActiveRecord::Base
 end
 ```
 
-Additionally you can use allow_rearating flag as follow to let raters to change their vote. By default allow_rearating is false.
+Additionally you can use letsrate_rerateable to let raters to change their vote.
 
 ```ruby
 class Car < ActiveRecord::Base
-  letsrate_rateable "speed", "engine", "price", allow_rearating: true
+  letsrate_rerateable "speed", "engine", "price"
 end
 ```
 
