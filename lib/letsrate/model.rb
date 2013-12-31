@@ -10,7 +10,7 @@ module Letsrate
         r.stars = stars
         r.rater = user
       end
-      if dirichlet_method 
+      if dirichlet_method
         update_rate_average_dirichlet(stars, dimension)
       else
         update_rate_average(stars, dimension)
@@ -27,7 +27,7 @@ module Letsrate
     posterior = dp.merge(stars_group){|key, a, b| a + b}
     sum = posterior.map{ |i, v| v }.inject { |a, b| a + b }
     davg = posterior.map{ |i, v| i * v }.inject { |a, b| a + b }.to_f / sum
-    
+
     if average(dimension).nil?
       RatingCache.create! do |avg|
         avg.cacheable_id = self.id
@@ -43,7 +43,7 @@ module Letsrate
       a.save!(validate: false)
     end
   end
-  
+
   def update_rate_average(stars, dimension=nil)
     if average(dimension).nil?
       RatingCache.create! do |avg|
@@ -84,23 +84,24 @@ module Letsrate
     end
 
     def letsrate_rateable(*dimensions)
-      has_many :rates_without_dimension, :as => :rateable, :class_name => "Rate", :dependent => :destroy, :conditions => {:dimension => nil}
+      has_many :rates_without_dimension, -> { where dimension: nil}, :as => :rateable, :class_name => "Rate", :dependent => :destroy
       has_many :raters_without_dimension, :through => :rates_without_dimension, :source => :rater
 
-      has_one :rate_average_without_dimension, :as => :cacheable, :class_name => "RatingCache",
-              :dependent => :destroy, :conditions => {:dimension => nil}
+      has_one :rate_average_without_dimension, -> { where dimension: nil}, :as => :cacheable,
+              :class_name => "RatingCache", :dependent => :destroy
 
 
       dimensions.each do |dimension|
-        has_many "#{dimension}_rates".to_sym, :dependent => :destroy,
-                                              :conditions => {:dimension => dimension.to_s},
+        has_many "#{dimension}_rates".to_sym, -> {where dimension: dimension.to_s},
+                                              :dependent => :destroy,
                                               :class_name => "Rate",
                                               :as => :rateable
 
         has_many "#{dimension}_raters".to_sym, :through => "#{dimension}_rates", :source => :rater
 
-        has_one "#{dimension}_average".to_sym, :as => :cacheable, :class_name => "RatingCache",
-                                               :dependent => :destroy, :conditions => {:dimension => dimension.to_s}
+        has_one "#{dimension}_average".to_sym, -> { where dimension: dimension.to_s },
+                                              :as => :cacheable, :class_name => "RatingCache",
+                                              :dependent => :destroy
       end
     end
   end
