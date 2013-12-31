@@ -11,7 +11,7 @@ class LetsrateGenerator < ActiveRecord::Generators::Base
     copy_file 'star-on.png', 'app/assets/images/star-on.png'
     copy_file 'star-off.png', 'app/assets/images/star-off.png'
     copy_file 'star-half.png', 'app/assets/images/star-half.png'
-    copy_file 'letsrate.js.cofee.erb', 'app/assets/javascripts/letsrate.js.coffee.erb'
+    copy_file 'letsrate.js.coffee.erb', 'app/assets/javascripts/letsrate.js.coffee.erb'
     copy_file 'rater_controller.rb', 'app/controllers/rater_controller.rb'
   end
 
