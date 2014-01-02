@@ -87,6 +87,12 @@ Speed : <%= rating_for @car, "engine", :star => 7 %>
 Speed : <%= rating_for @car, "price" %>
 ```
 
+You can use the rating_for_user helper method to show the star rating for the user.
+
+```erb
+Speed : <%= rating_for_user @car, current_user, "speed", :star => 10 %>
+```
+
 
 ## Feedback
 If you find bugs please open a ticket at [https://github.com/muratguzel/letsrate/issues](https://github.com/muratguzel/letsrate/issues)
