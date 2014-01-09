@@ -4,24 +4,21 @@ module Letsrate
 
   def rate(stars, user, dimension=nil, dirichlet_method=false)
     dimension = nil if dimension.blank?
+    raise "User has already rated." unless can_rate? user, dimension
 
-    if can_rate? user, dimension
-      rates(dimension).create! do |r|
-        r.stars = stars
-        r.rater = user
-      end
-      if dirichlet_method
-        update_rate_average_dirichlet(stars, dimension)
-      else
-        update_rate_average(stars, dimension)
-      end
+    rates(dimension).create! do |r|
+      r.stars = stars
+      r.rater = user
+    end
+
+    if dirichlet_method
+      update_rate_average_dirichlet(stars, dimension)
     else
-      raise "User has already rated."
+      update_rate_average(stars, dimension)
     end
   end
 
   def update_rate_average_dirichlet(stars, dimension=nil)
-    ## assumes 5 possible vote categories
     dp = {1 => 1, 2 => 1, 3 => 1, 4 => 1, 5 => 1}
     stars_group = Hash[rates(dimension).group(:stars).count.map{|k,v| [k.to_i,v] }]
     posterior = dp.merge(stars_group){|key, a, b| a + b}
@@ -29,35 +26,18 @@ module Letsrate
     davg = posterior.map{ |i, v| i * v }.inject { |a, b| a + b }.to_f / sum
 
     if average(dimension).nil?
-      RatingCache.create! do |avg|
-        avg.cacheable_id = self.id
-        avg.cacheable_type = self.class.name
-        avg.qty = 1
-        avg.avg = davg
-        avg.dimension = dimension
-      end
+      create_rating_cache davg, dimension
     else
-      a = average(dimension)
-      a.qty = rates(dimension).count
-      a.avg = davg
-      a.save!(validate: false)
+      update_rating_cache davg, dimension
     end
   end
 
   def update_rate_average(stars, dimension=nil)
     if average(dimension).nil?
-      RatingCache.create! do |avg|
-        avg.cacheable_id = self.id
-        avg.cacheable_type = self.class.name
-        avg.avg = stars
-        avg.qty = 1
-        avg.dimension = dimension
-      end
+      create_rating_cache stars, dimension
     else
-      a = average(dimension)
-      a.qty = rates(dimension).count
-      a.avg = rates(dimension).average(:stars)
-      a.save!(validate: false)
+      avg = rates(dimension).average(:stars)
+      update_rating_cache avg, dimension
     end
   end
 
@@ -66,7 +46,7 @@ module Letsrate
   end
 
   def can_rate?(user, dimension=nil)
-    user.ratings_given.where(dimension: dimension, rateable_id: id, rateable_type: self.class.name).size.zero?
+    rates(dimension).where(rater_id: user.id).size.zero?
   end
 
   def rates(dimension=nil)
@@ -106,6 +86,23 @@ module Letsrate
     end
   end
 
+  private
+
+  def create_rating_cache(avg, dimension=nil)
+    options = {avg: avg, qty: 1, dimension: dimension}
+    if dimension
+      send "create_#{dimension}_average", options
+    else
+      create_rate_average_without_dimension options
+    end
+  end
+
+  def update_rating_cache(avg, dimension=nil)
+    a = average(dimension)
+    a.qty = rates(dimension).count
+    a.avg = avg
+    a.save!(validate: false)
+  end
 end
 
 class ActiveRecord::Base
