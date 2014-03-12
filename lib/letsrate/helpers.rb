@@ -22,8 +22,8 @@ module Helpers
     @object = rateable_obj
     @user = rating_user
 	  @rating = Rate.find_by_rater_id_and_rateable_id_and_dimension(@user.id, @object.id, dimension)
-	  available_stars = @rating ? @rating.stars : 0
-    selected_star = options[:star] || 5    
+	  selected_star = @rating ? @rating.stars : 0
+    available_stars = options[:star] || 5    
 
     disable_after_rate = options[:disable_after_rate] || false
 
@@ -32,11 +32,11 @@ module Helpers
       readonly = current_user.present? ? !rateable_obj.can_rate?(current_user.id, dimension) : true
     end
 
-    content_tag :div, '', "data-dimension" => dimension, :class => "star", "data-rating" => available_stars,
+    content_tag :div, '', "data-dimension" => dimension, :class => "star", "data-rating" => selected_star,
                 "data-id" => rateable_obj.id, "data-classname" => rateable_obj.class.name,
                 "data-disable-after-rate" => disable_after_rate,
                 "data-readonly" => readonly,
-                "data-star-count" => selected_star
+                "data-star-count" => available_stars
   end
 
 end
