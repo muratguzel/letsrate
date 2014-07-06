@@ -2,13 +2,13 @@
 
 Provides the best way to add rating capabilites to your Rails application with jQuery Raty plugin.
 
-[![Build Status](https://secure.travis-ci.org/muratguzel/letsrate.png)](http://travis-ci.org/muratguzel/letsrate)
+[![Build Status](https://secure.travis-ci.org/wazery/letsrate.png)](http://travis-ci.org/wazery/letsrate)
 [![Dependency Status](https://gemnasium.com/muratguzel/letsrate.png)](https://gemnasium.com/muratguzel/letsrate)
 [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/muratguzel/letsrate)
 
 ## Repository
 
-Find it at [github.com/muratguzel/letsrate](https://github.com/muratguzel/letsrate)
+This is a fork from the repository [github.com/muratguzel/letsrate](https://github.com/muratguzel/letsrate), the aim of this fork is to refresh the development in this Gem, so please if you have any pull request issue it here.
 
 ## Instructions
 
