@@ -1,15 +1,24 @@
-# Letsrate Rating Gem
+# RatyRate Stars Rating Gem [![endorse](http://api.coderwall.com/wazery/endorsecount.png)](http://coderwall.com/wazery)
 
-Provides the best way to add rating capabilites to your Rails application with jQuery Raty plugin.
+A Ruby Gem that provides the same functionality of jQuery Raty library, and adds IMDB style rating.
 
+[![Gem Version](https://badge.fury.io/rb/money-rails.png)](http://badge.fury.io/rb/money-rails)
 [![Build Status](https://secure.travis-ci.org/wazery/letsrate.png)](http://travis-ci.org/wazery/letsrate)
-[![Dependency Status](https://gemnasium.com/muratguzel/letsrate.png)](https://gemnasium.com/muratguzel/letsrate)
-[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/muratguzel/letsrate)
+[![Dependency Status](https://gemnasium.com/wazery/letsrate.svg)](https://gemnasium.com/wazery/letsrate)
+[![Code Climate](https://codeclimate.com/github/wazery/letsrate.png)](https://codeclimate.com/github/wazery/letsrate)
+[![License](http://img.shields.io/license/MIT.png?color=green)](http://opensource.org/licenses/MIT)
+[![Support jQuery Raty](http://img.shields.io/gittip/wbotelhos.svg)](https://www.gittip.com/wazery "Git Tip")
 
 ## Repository
 
-This is a fork from the repository [github.com/muratguzel/letsrate](https://github.com/muratguzel/letsrate), the aim of this fork is to refresh the development in this Gem, so please if you have any pull request issue it here.
+This is a fork from the repository [muratguzel/letsrate](https://github.com/muratguzel/letsrate), the aim of this fork is to refresh the development in this Gem, so please if you have any pull request issue it here.
 
+## Changelog from the main repository
+```
+1. Some feature
+2.
+3.
+```
 ## Instructions
 
 ### Install
@@ -93,6 +102,5 @@ You can use the rating_for_user helper method to show the star rating for the us
 Speed : <%= rating_for_user @car, current_user, "speed", :star => 10 %>
 ```
 
-
 ## Feedback
-If you find bugs please open a ticket at [https://github.com/muratguzel/letsrate/issues](https://github.com/muratguzel/letsrate/issues)
+If you find bugs please open a ticket at [https://github.com/wazery/letsrate/issues](https://github.com/wazery/letsrate/issues)
