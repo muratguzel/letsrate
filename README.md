@@ -1,33 +1,38 @@
 # RatyRate Stars Rating Gem [![endorse](http://api.coderwall.com/wazery/endorsecount.png)](http://coderwall.com/wazery)
 
-A Ruby Gem that provides the same functionality of [jQuery Raty](https://github.com/wbotelhos/raty) library, and adds IMDB style rating.
+A Ruby Gem that wrap the functionality of [jQuery Raty](https://github.com/wbotelhos/raty) library, and provides optional IMDB style rating.
 
-[![Gem Version](https://badge.fury.io/rb/money-rails.png)](http://badge.fury.io/rb/money-rails)
+[![Gem Version](https://badge.fury.io/rb/ratyrate.svg)](http://badge.fury.io/rb/ratyrate)
 [![Build Status](https://travis-ci.org/wazery/ratyrate.svg)](http://travis-ci.org/wazery/ratyrate)
-[![Dependency Status](https://gemnasium.com/wazery/letsrate.svg)](https://gemnasium.com/wazery/letsrate)
+[![Dependency Status](https://gemnasium.com/wazery/ratyrate.svg)](https://gemnasium.com/wazery/ratyrate)
 [![Code Climate](https://codeclimate.com/github/wazery/ratyrate.png)](https://codeclimate.com/github/wazery/ratyrate)
 [![License](http://img.shields.io/license/MIT.png?color=green)](http://opensource.org/licenses/MIT)
 [![Support jQuery Raty](http://img.shields.io/gittip/wbotelhos.svg)](https://www.gittip.com/wazery "Git Tip")
 
 ## Repository
 
-This is a fork against the repository [muratguzel/letsrate](https://github.com/muratguzel/letsrate), the aim of this fork is to refresh the development in this Gem with a new scope and features, so please if you have any pull request issue it here.
+This is a fork against the repository [muratguzel/ratyrate](https://github.com/muratguzel/ratyrate), the aim of this fork is to refresh the development in this Gem with a new scope and features, so please if you have any pull request issue it here, also I imported all the issues in the original repo.
 
 ## Changelog from the main repository
 
-```
 1. Exposed a lot of jQuery Raty plugin [features](http://wbotelhos.com/raty)
   1. Added cancel button that can be customized and inserted to left or right
   2. Added the ability to set custom star images for on, half or off state
   3. Added the ability to set a custom path for the images
   4. Added the ability to enable/disable half stars
   5. Added the ability to turn on/off half star
-2. User can now disable or enable the rating after the first rate
+2. Their is a new option now to disable or enable the rating after the first rate
 3. Added a star style to show just the score of the dimension, but this star is not editable
 4. Added an overall average star just like IMDB style
 3. Nothing else
 4. :wq
-```
+
+## TODO
+
+1. Write RSpec tests for this Gem
+2. Create a Heroku app to illustrate this Gem's purpose and features (MovieStore)
+3. Add option to show the number of users who gave rates
+4. Add a share helper to Facebook, Twitter
 
 ## Detailed view of the new features
 
@@ -50,7 +55,7 @@ rails g ratyrate User
 ```
 
 The generator takes one argument which is the name of your existing devise user model UserModelName. This is necessary to bind the user and rating datas.
-Also the generator copies necessary files (jQuery Raty plugin files, star icons and JavaScripts)
+Also the generator copies necessary files (jQuery Raty plugin files, star icons and JavaScript files)
 
 Example:
 
@@ -110,38 +115,44 @@ Speed : <%= rating_for @car, "speed", :star => 10 %>
 Speed : <%= rating_for @car, "engine", :star => 7 %>
 Speed : <%= rating_for @car, "price" %>
 ```
-2- To enable half stars use the option *enable_half*
+2- If you want to disable/enable the rating after user's first rate use the new option *disable_after_rate*
+```erb
+Speed : <%= rating_for @car, "speed", :disable_after_rate => true %>
+```
+To enable changes after first user rate set ```disable_after_rate``` to false
+
+3- To enable half stars use the option *enable_half*
 ```erb
 Speed : <%= rating_for @car, "speed", :enable_half => true %>
 ```
-3- To show or hide the half stars use *half_show*
+4- To show or hide the half stars use *half_show*
 ```erb
 Speed : <%= rating_for @car, "speed", :half_show => true %>
 ```
-4- To change the path in which the star images (star-on.png, star-off.png, star-half.png, ..etc) are located use
+5- To change the path in which the star images (star-on.png, star-off.png, star-half.png, ..etc) are located use
 ```erb
 Speed : <%= rating_for @car, "speed", :star_path => true %>
 ```
 
 To just change one of the star images choose from these options (star_on, star_off, star_half)
 
-5- To add the cancel button to the left, or right of the stars use **(default is false)**
+6- To add the cancel button to the left, or right of the stars use **(default is false)**
 ```erb
 Speed : <%= rating_for @car, "speed", :cancel => true %>
 ```
-6- To change the place of the cancel button (left, or right) use **(default is left)**
+7- To change the place of the cancel button (left, or right) use **(default is left)**
 ```erb
 Speed : <%= rating_for @car, "speed", :cancel_place => left %>
 ```
-7- To change the hint on the cancel button use **(default is )**
+8- To change the hint on the cancel button use **(default is "Cancel current rating!" )**
 ```erb
 Speed : <%= rating_for @car, "speed", :cancel_hint => "Cancel this rating!" %>
 ```
-8- To change the image of the cancel on button use
+9- To change the image of the cancel on button use
 ```erb
 Speed : <%= rating_for @car, "speed", :cancel_on => "cancel-on2.png" %>
 ```
-9- To change the image of the cancel off use
+10- To change the image of the cancel off use
 ```erb
   Speed : <%= rating_for @car, "speed", :cancel_off => "cancel-off2.png" %>
 ```

@@ -1,5 +1,5 @@
 require 'active_support/concern'
-module Letsrate
+module Ratyrate
   extend ActiveSupport::Concern
 
   def rate(stars, user, dimension=nil, dirichlet_method=false)
@@ -16,7 +16,7 @@ module Letsrate
         update_rate_average(stars, dimension)
       end
     else
-      raise "User has already rated."
+      update_current_rate(stars, user, dimension)
     end
   end
 
@@ -43,7 +43,7 @@ module Letsrate
       a.save!(validate: false)
     end
   end
-
+  
   def update_rate_average(stars, dimension=nil)
     if average(dimension).nil?
       RatingCache.create! do |avg|
@@ -61,8 +61,49 @@ module Letsrate
     end
   end
 
+  def update_current_rate(stars, user, dimension)
+    current_rate = user.ratings_given.where(rater_id: user.id, rateable_id: self.id, dimension: dimension).take
+    current_rate.stars = stars
+    current_rate.save!(validate: false)
+
+    if rates(dimension).count > 1
+      update_rate_average(stars, dimension)
+    else # Set the avarage to the exact number of stars
+      a = average(dimension)
+      a.avg = stars
+      a.save!(validate: false)
+    end
+  end
+
+  def overall_avg(user)
+    # avg = OverallAverage.where(rateable_id: self.id)
+    # #FIXME: Fix the bug when the movie has no ratings
+    # unless avg.empty? 
+    #   return avg.take.avg unless avg.take.avg == 0
+    # else # calculate average, and save it
+    #   dimensions_count = overall_score = 0
+    #   user.ratings_given.select('DISTINCT dimension').each do |d|
+    #     dimensions_count = dimensions_count + 1
+    #     unless average(d.dimension).nil?
+    #       overall_score = overall_score + average(d.dimension).avg 
+    #     end
+    #   end
+    #   overall_avg = (overall_score / dimensions_count).to_f.round(1)
+    #   AverageCache.create! do |a|
+    #     a.rater_id = user.id
+    #     a.rateable_id = self.id
+    #     a.avg = overall_avg
+    #   end
+    #   overall_avg
+    # end
+  end
+  
+  # calculate the movie overall average rating for all users
+  def calculate_overall_average
+  end
+
   def average(dimension=nil)
-    dimension ?  self.send("#{dimension}_average") : rate_average_without_dimension
+    dimension ? self.send("#{dimension}_average") : rate_average_without_dimension
   end
 
   def can_rate?(user, dimension=nil)
@@ -79,17 +120,16 @@ module Letsrate
 
   module ClassMethods
 
-    def letsrate_rater
+    def ratyrate_rater
       has_many :ratings_given, :class_name => "Rate", :foreign_key => :rater_id
     end
 
-    def letsrate_rateable(*dimensions)
+    def ratyrate_rateable(*dimensions)
       has_many :rates_without_dimension, -> { where dimension: nil}, :as => :rateable, :class_name => "Rate", :dependent => :destroy
       has_many :raters_without_dimension, :through => :rates_without_dimension, :source => :rater
 
       has_one :rate_average_without_dimension, -> { where dimension: nil}, :as => :cacheable,
               :class_name => "RatingCache", :dependent => :destroy
-
 
       dimensions.each do |dimension|
         has_many "#{dimension}_rates".to_sym, -> {where dimension: dimension.to_s},
@@ -109,5 +149,5 @@ module Letsrate
 end
 
 class ActiveRecord::Base
-  include Letsrate
+  include Ratyrate
 end

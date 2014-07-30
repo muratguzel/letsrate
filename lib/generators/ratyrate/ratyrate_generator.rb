@@ -1,6 +1,6 @@
 require 'rails/generators/migration'
 require 'rails/generators/active_record'
-class LetsrateGenerator < ActiveRecord::Generators::Base
+class RatyrateGenerator < ActiveRecord::Generators::Base
   include Rails::Generators::Migration
 
   source_root File.expand_path('../templates', __FILE__)
@@ -11,7 +11,11 @@ class LetsrateGenerator < ActiveRecord::Generators::Base
     copy_file 'star-on.png', 'app/assets/images/star-on.png'
     copy_file 'star-off.png', 'app/assets/images/star-off.png'
     copy_file 'star-half.png', 'app/assets/images/star-half.png'
-    copy_file 'letsrate.js.erb', 'app/assets/javascripts/letsrate.js.erb'
+    copy_file 'mid-star.png', 'app/assets/images/mid-star.png'
+    copy_file 'big-star.png', 'app/assets/images/big-star.png'
+    copy_file 'cancel-on.png', 'app/assets/images/cancel-on.png'
+    copy_file 'cancel-off.png', 'app/assets/images/cancel-off.png'
+    copy_file 'ratyrate.js.erb', 'app/assets/javascripts/ratyrate.js.erb'
     copy_file 'rater_controller.rb', 'app/controllers/rater_controller.rb'
   end
 
@@ -22,6 +26,8 @@ class LetsrateGenerator < ActiveRecord::Generators::Base
     class_collisions 'Rate'
     template 'model.rb', File.join('app/models', "rate.rb")
     template 'cache_model.rb', File.join('app/models', "rating_cache.rb")
+    template 'average_cache_model.rb', File.join('app/models', "average_cache.rb")
+    template 'overall_average_model.rb', File.join('app/models', "overall_average.rb")
   end
 
   def add_rate_path_to_route
@@ -34,7 +40,17 @@ class LetsrateGenerator < ActiveRecord::Generators::Base
   end
 
   desc "migration is creating ..."
-  def create_letsrate_migration
+  def create_ratyrate_migration
     migration_template "migration.rb", "db/migrate/create_rates.rb"
+  end
+
+  desc "average caches migration is creating ..."
+  def create_average_caches_migration
+    migration_template "average_cache_migration.rb", "db/migrate/create_average_caches.rb"
+  end
+
+  desc "overall averages migration is creating ..."
+  def create_overall_averages_migration
+    migration_template "overall_average_migration.rb", "db/migrate/create_overall_averages.rb"
   end
 end
