@@ -31,8 +31,9 @@ This is a fork against the repository [muratguzel/ratyrate](https://github.com/m
 
 1. Write RSpec tests for this Gem
 2. Create a Heroku app to illustrate this Gem's purpose and features (MovieStore)
-3. Add option to show the number of users who gave rates
-4. Add a share helper to Facebook, Twitter
+3. Write a complete tutorial on SitePoint that illustrates how to use this gem
+4. Add option to show the number of users who gave rates
+5. Add a share helper to Facebook, Twitter
 
 ## Detailed view of the new features
 
@@ -115,38 +116,44 @@ Speed : <%= rating_for @car, "speed", :star => 10 %>
 Speed : <%= rating_for @car, "engine", :star => 7 %>
 Speed : <%= rating_for @car, "price" %>
 ```
-2- To enable half stars use the option *enable_half*
+2- If you want to disable/enable the rating after user's first rate use the new option *disable_after_rate*
+```erb
+Speed : <%= rating_for @car, "speed", :disable_after_rate => true %>
+```
+To enable changes after first user rate set ```disable_after_rate``` to false
+
+3- To enable half stars use the option *enable_half*
 ```erb
 Speed : <%= rating_for @car, "speed", :enable_half => true %>
 ```
-3- To show or hide the half stars use *half_show*
+4- To show or hide the half stars use *half_show*
 ```erb
 Speed : <%= rating_for @car, "speed", :half_show => true %>
 ```
-4- To change the path in which the star images (star-on.png, star-off.png, star-half.png, ..etc) are located use
+5- To change the path in which the star images (star-on.png, star-off.png, star-half.png, ..etc) are located use
 ```erb
 Speed : <%= rating_for @car, "speed", :star_path => true %>
 ```
 
 To just change one of the star images choose from these options (star_on, star_off, star_half)
 
-5- To add the cancel button to the left, or right of the stars use **(default is false)**
+6- To add the cancel button to the left, or right of the stars use **(default is false)**
 ```erb
 Speed : <%= rating_for @car, "speed", :cancel => true %>
 ```
-6- To change the place of the cancel button (left, or right) use **(default is left)**
+7- To change the place of the cancel button (left, or right) use **(default is left)**
 ```erb
 Speed : <%= rating_for @car, "speed", :cancel_place => left %>
 ```
-7- To change the hint on the cancel button use **(default is "Cancel current rating!" )**
+8- To change the hint on the cancel button use **(default is "Cancel current rating!" )**
 ```erb
 Speed : <%= rating_for @car, "speed", :cancel_hint => "Cancel this rating!" %>
 ```
-8- To change the image of the cancel on button use
+9- To change the image of the cancel on button use
 ```erb
 Speed : <%= rating_for @car, "speed", :cancel_on => "cancel-on2.png" %>
 ```
-9- To change the image of the cancel off use
+10- To change the image of the cancel off use
 ```erb
   Speed : <%= rating_for @car, "speed", :cancel_off => "cancel-off2.png" %>
 ```

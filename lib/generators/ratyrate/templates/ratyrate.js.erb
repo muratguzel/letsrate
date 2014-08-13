@@ -1,11 +1,14 @@
-$.fn.raty.defaults.path = "/assets";
-$.fn.raty.defaults.half_show = true;
 $.fn.raty.defaults.half = false;
+$.fn.raty.defaults.halfShow = false;
+$.fn.raty.defaults.path = "/assets";
 $.fn.raty.defaults.cancel = false;
 
 $(function(){
   $(".star").each(function() {
     var $readonly = ($(this).attr('data-readonly') == 'true');
+    var $half     = ($(this).attr('data-enable-half') == 'true');
+    var $halfShow = ($(this).attr('data-half-show') == 'true');
+    var $single   = ($(this).attr('data-single') == 'true');
     $(this).raty({
       score: function() {
         return $(this).attr('data-rating')
@@ -13,8 +16,9 @@ $(function(){
       number: function() {
         return $(this).attr('data-star-count')
       },
-      half:        $(this).attr('data-enable-half'), 
-      half_show:   $(this).attr('data-half-show'),
+      half:        $half,
+      halfShow:    $halfShow,
+      single:      $single,
       path:        $(this).attr('data-star-path'),
       starOn:      $(this).attr('data-star-on'),
       starOff:     $(this).attr('data-star-off'),
@@ -27,7 +31,6 @@ $(function(){
       noRatedMsg:  $(this).attr('data-no-rated-message'),
       round:       $(this).attr('data-round'),
       space:       $(this).attr('data-space'),
-      // single:      $(this).attr('data-single'),
       target:      $(this).attr('data-target'),
       targetText:  $(this).attr('data-target-text'),
       targetType:  $(this).attr('data-target-type'),

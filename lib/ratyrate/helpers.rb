@@ -5,8 +5,8 @@ module Helpers
     avg = cached_average ? cached_average.avg : 0
 
     star         = options[:star]         || 5
-    enable_half  = options[:enable_half]  || true 
-    half_show    = options[:half_show]    || true 
+    enable_half  = options[:enable_half]  || false 
+    half_show    = options[:half_show]    || false 
     star_path    = options[:star_path]    || "/assets"
     star_on      = options[:star_on]      || "star-on.png"
     star_off     = options[:star_off]     || "star-off.png"
@@ -32,7 +32,7 @@ module Helpers
     if disable_after_rate
       readonly = !(current_user && rateable_obj.can_rate?(current_user, dimension))
     else
-      readonly = false
+      readonly = !current_user || false
     end
 
     if options[:imdb_avg] && readonly
@@ -83,8 +83,8 @@ module Helpers
 	  stars = @rating ? @rating.stars : 0
 
     star         = options[:star]         || 5
-    enable_half  = options[:enable_half]  || true 
-    half_show    = options[:half_show]    || true 
+    enable_half  = options[:enable_half]  || false 
+    half_show    = options[:half_show]    || false
     star_path    = options[:star_path]    || "/assets"
     star_on      = options[:star_on]      || "star-on.png"
     star_off     = options[:star_off]     || "star-off.png"
