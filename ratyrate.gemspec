@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Islam Wazery"]
   s.email       = ["wazery@ubuntu.com"]
   s.homepage    = "http://github.com/wazery/ratyrate"
-  s.summary     = %q{A Ruby Gem that provides the same functionality of jQuery Raty library, and adds IMDB style rating.}
-  s.description = %q{A Ruby Gem that provides the same functionality of jQuery Raty library, and adds IMDB style rating.}
+  s.summary     = %q{A Ruby Gem that wraps the functionality of jQuery Raty library, and adds IMDB style rating.}
+  s.description = %q{A Ruby Gem that wraps the functionality of jQuery Raty library, and adds IMDB style rating.}
 
   s.rubyforge_project = "ratyrate"
 
