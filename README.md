@@ -24,21 +24,25 @@ This is a fork against the repository [muratguzel/ratyrate](https://github.com/m
 2. Their is a new option now to disable or enable the rating after the first rate
 3. Added a star style to show just the score of the dimension, but this star is not editable
 4. Added an overall average star just like IMDB style
+5. Created a Heroku app to illustrate this Gem's purpose and features (MovieStore)
+6. [Write a complete tutorial on SitePoint that illustrates how to use this gem](http://www.sitepoint.com/ratyrate-add-rating-rails-app/)
 3. Nothing else
 4. :wq
 
 ## TODO
 
 1. Write RSpec tests for this Gem
-2. Create a Heroku app to illustrate this Gem's purpose and features (MovieStore)
-3. Write a complete tutorial on SitePoint that illustrates how to use this gem
-4. Add option to show the number of users who gave rates
-5. Add a share helper to Facebook, Twitter
-6. Force refresh after rating when ***disable_after_rate*** and ***imdb_avg*** options is set to true.
+3. Add option to show the number of users who gave rates
+4. Add a share helper to Facebook, Twitter
+5. Force refresh after rating when ***disable_after_rate*** and ***imdb_avg*** options is set to true.
 
 ## Detailed view of the new features
 
 ![Detailed view of the new featurews](https://dl.dropboxusercontent.com/u/71605080/RatyRate%20Features.png)
+
+## Complete tutorial for this Gem on SitePoint - Ruby
+
+I wrote a complete tutorial on SitePoint to cover this Gem's features in detail, if you are concerned to learn more about it just pay a visit to this [link](http://www.sitepoint.com/ratyrate-add-rating-rails-app/).
 
 ## Instructions
 
