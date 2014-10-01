@@ -108,7 +108,7 @@ module Helpers
 
     readonly=false
     if disable_after_rate
-      readonly = current_user.present? ? !rateable_obj.can_rate?(current_user.id, dimension) : true
+      readonly = rating_user.present? ? !rateable_obj.can_rate?(rating_user, dimension) : true
     end
 
     content_tag :div, '', "data-dimension" => dimension, :class => "star", "data-rating" => stars,
@@ -117,7 +117,7 @@ module Helpers
                 "data-readonly" => readonly,
                 "data-enable-half" => enable_half,
                 "data-half-show" => half_show,
-                "data-star-count" => stars, 
+                "data-star-count" => star, 
                 "data-star-path" => star_path,
                 "data-star-on" => star_on,
                 "data-star-off" => star_off,
