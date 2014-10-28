@@ -25,7 +25,7 @@ This is a fork against the repository [muratguzel/ratyrate](https://github.com/m
 3. Added a star style to show just the score of the dimension, but this star is not editable
 4. Added an overall average star just like IMDB style
 5. Created a Heroku app to illustrate this Gem's purpose and features (MovieStore)
-6. [Write a complete tutorial on SitePoint that illustrates how to use this gem](http://www.sitepoint.com/ratyrate-add-rating-rails-app/)
+6. [Wrote a complete tutorial on SitePoint that illustrates how to use this gem](http://www.sitepoint.com/ratyrate-add-rating-rails-app/)
 3. Nothing else
 4. :wq
 
