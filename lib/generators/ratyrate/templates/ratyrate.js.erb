@@ -3,7 +3,7 @@ $.fn.raty.defaults.halfShow = false;
 $.fn.raty.defaults.path = "/assets";
 $.fn.raty.defaults.cancel = false;
 
-$(function(){
+function initstars(){
   $(".star").each(function() {
     var $readonly = ($(this).attr('data-readonly') == 'true');
     var $half     = ($(this).attr('data-enable-half') == 'true');
@@ -59,4 +59,7 @@ $(function(){
       }
     });
   });
-});
+};
+
+$(document).ready(initstars);
+$(document).on('page:change',initstars);
