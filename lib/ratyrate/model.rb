@@ -29,13 +29,7 @@ module Ratyrate
     davg = posterior.map{ |i, v| i * v }.inject { |a, b| a + b }.to_f / sum
 
     if average(dimension).nil?
-      RatingCache.create! do |avg|
-        avg.cacheable_id = self.id
-        avg.cacheable_type = self.class.name
-        avg.qty = 1
-        avg.avg = davg
-        avg.dimension = dimension
-      end
+      send("create_#{average_assoc_name(dimension)}!", { avg: davg, qty: 1, dimension: dimension })
     else
       a = average(dimension)
       a.qty = rates(dimension).count
@@ -46,13 +40,7 @@ module Ratyrate
   
   def update_rate_average(stars, dimension=nil)
     if average(dimension).nil?
-      RatingCache.create! do |avg|
-        avg.cacheable_id = self.id
-        avg.cacheable_type = self.class.name
-        avg.avg = stars
-        avg.qty = 1
-        avg.dimension = dimension
-      end
+      send("create_#{average_assoc_name(dimension)}!", { avg: stars, qty: 1, dimension: dimension })
     else
       a = average(dimension)
       a.qty = rates(dimension).count
@@ -62,7 +50,7 @@ module Ratyrate
   end
 
   def update_current_rate(stars, user, dimension)
-    current_rate = user.ratings_given.where(rater_id: user.id, rateable_id: self.id, dimension: dimension).take
+    current_rate = rates.where(rater_id: user.id, dimension: dimension).take
     current_rate.stars = stars
     current_rate.save!(validate: false)
 
@@ -103,11 +91,15 @@ module Ratyrate
   end
 
   def average(dimension=nil)
-    dimension ? self.send("#{dimension}_average") : rate_average_without_dimension
+    send(average_assoc_name(dimension))
+  end
+
+  def average_assoc_name(dimension = nil)
+    dimension ? "#{dimension}_average" : 'rate_average_without_dimension'
   end
 
   def can_rate?(user, dimension=nil)
-    user.ratings_given.where(dimension: dimension, rateable_id: id, rateable_type: self.class.name).size.zero?
+    rates.where(rater_id: user.id, dimension: dimension).size.zero?
   end
 
   def rates(dimension=nil)
