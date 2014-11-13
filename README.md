@@ -185,6 +185,18 @@ And you can use the *imdb_style_rating_for* to show a similar to IMDB rating sty
 Speed : <%= imdb_style_rating_for @car, current_user %>
 ```
 
+## Semantic Versioning
+
+Ratyrate attempts to follow semantic versioning in the format of `x.y.z`, where:
+
+`x` stands for a major version (new features that are not backward-compatible).
+
+`y` stands for a minor version (new features that are backward-compatible).
+
+`z` stands for a patch (bug fixes).
+
+In other words: `Major.Minor.Patch`.
+
 ## Feedback
 If you find bugs please open a ticket at [https://github.com/wazery/ratyrate/issues](https://github.com/wazery/ratyrate/issues)
 
