@@ -129,7 +129,7 @@ module Ratyrate
                                               :class_name => "Rate",
                                               :as => :rateable
 
-        has_many "#{dimension}_raters".to_sym, :through => "#{dimension}_rates", :source => :rater
+        has_many "#{dimension}_raters".to_sym, :through => :"#{dimension}_rates", :source => :rater
 
         has_one "#{dimension}_average".to_sym, -> { where dimension: dimension.to_s },
                                               :as => :cacheable, :class_name => "RatingCache",
