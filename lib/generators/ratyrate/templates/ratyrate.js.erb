@@ -9,6 +9,7 @@ function initstars(){
     var $half     = ($(this).attr('data-enable-half') == 'true');
     var $halfShow = ($(this).attr('data-half-show') == 'true');
     var $single   = ($(this).attr('data-single') == 'true');
+    var $cancel   = ($(this).attr('data-cancel') == 'true');
     $(this).raty({
       score: function() {
         return $(this).attr('data-rating')
@@ -23,7 +24,7 @@ function initstars(){
       starOn:      $(this).attr('data-star-on'),
       starOff:     $(this).attr('data-star-off'),
       starHalf:    $(this).attr('data-star-half'),
-      cancel:      $(this).attr('data-cancel'),
+      cancel:      $cancel,
       cancelPlace: $(this).attr('data-cancel-place'),
       cancelHint:  $(this).attr('data-cancel-hint'),
       cancelOn:    $(this).attr('data-cancel-on'),
