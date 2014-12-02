@@ -11,7 +11,7 @@ A Ruby Gem that wrap the functionality of [jQuery Raty](https://github.com/wbote
 
 ## Repository
 
-This is a fork against the repository [muratguzel/ratyrate](https://github.com/muratguzel/ratyrate), the aim of this fork is to refresh the development in this Gem with a new scope and features, so please if you have any pull request issue it here, also I imported all the issues in the original repo.
+This is a fork against the repository [muratguzel/letsrate](https://github.com/muratguzel/letsrate), the aim of this fork is to refresh the development in this Gem with a new scope and features, so please if you have any pull request issue it here, also I imported all the issues in the original repo.
 
 ## Changelog from the main repository
 
