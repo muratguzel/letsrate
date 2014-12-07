@@ -8,7 +8,7 @@ Provides the best way to add rating capabilites to your Rails application with j
 
 ## Repository
 
-This repository is outdated for now, please use the forked and refreshed gem called [wazery/RatyRate](https://github.com/wazery/ratyrate)
+This repository is **outdated** for now, please use the forked and refreshed gem called [wazery/RatyRate](https://github.com/wazery/ratyrate)
 
 ## Instructions
 
