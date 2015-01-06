@@ -8,7 +8,7 @@ Provides the best way to add rating capabilites to your Rails application with j
 
 ### Future Of The Letsrate Gem
 
-This gem will be updated next week with many features. 
+This gem will be updated on very early 2015  with many features. :) You can send me a message if you want to be a part of it. 
 
 ## Instructions
 
