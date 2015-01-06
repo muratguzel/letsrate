@@ -6,9 +6,9 @@ Provides the best way to add rating capabilites to your Rails application with j
 [![Dependency Status](https://gemnasium.com/muratguzel/letsrate.png)](https://gemnasium.com/muratguzel/letsrate)
 [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/muratguzel/letsrate)
 
-## Repository
+### Future Of The Letsrate Gem
 
-This repository is **outdated** for now, please use the forked and refreshed gem called [wazery/RatyRate](https://github.com/wazery/ratyrate)
+This gem will be updated next week with many features. 
 
 ## Instructions
 
