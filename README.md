@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/wazery/ratyrate.png?label=ready&title=Ready)](https://waffle.io/wazery/ratyrate)
 # RatyRate Stars Rating Gem [![endorse](http://api.coderwall.com/wazery/endorsecount.png)](http://coderwall.com/wazery)
 
 A Ruby Gem that wrap the functionality of [jQuery Raty](https://github.com/wbotelhos/raty) library, and provides optional IMDB style rating.
