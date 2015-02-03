@@ -88,6 +88,8 @@ module Ratyrate
   
   # calculate the movie overall average rating for all users
   def calculate_overall_average
+    rating = Rate.where(rateable: self).pluck('stars')
+    (rating.reduce(:+).to_f / rating.size).round(1)
   end
 
   def average(dimension=nil)
