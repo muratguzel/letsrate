@@ -1,9 +1,10 @@
 module Helpers
   def rating_for(rateable_obj, dimension=nil, options={})
 
-    cached_average = rateable_obj.average dimension
+    cache_column_name = dimension ? "#{dimension}_rating_average" : "rating_average"
+    cached_average = rateable_obj.send(cache_column_name)
 
-    avg = cached_average ? cached_average.avg : 0
+    avg = cached_average ? cached_average : 0
 
     star = options[:star] || 5
 
