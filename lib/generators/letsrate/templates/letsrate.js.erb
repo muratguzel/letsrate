@@ -1,7 +1,7 @@
 $.fn.raty.defaults.path = "/assets";
 $.fn.raty.defaults.half_show = true;
 
-$(function(){
+$(document).on("ready page:load",function(){
   $(".star").each(function() {
     var $readonly = ($(this).attr('data-readonly') == 'true');
     $(this).raty({
