@@ -34,7 +34,7 @@ class LetsrateGenerator < ActiveRecord::Generators::Base
   end
 
   desc "migration is creating ..."
-  def create_rates_migration
+  def create_migration
     migration_template "migration.rb", "db/migrate/create_rates.rb"
   end
 end
