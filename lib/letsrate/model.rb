@@ -69,6 +69,10 @@ module Letsrate
     user.ratings_given.where(dimension: dimension, rateable_id: id, rateable_type: self.class.name).size.zero?
   end
 
+  def has_rate?(user, dimension=nil)
+    user.ratings_given.where(dimension: dimension, rateable_id: id, rateable_type: self.class.name).size.nonzero?
+  end
+
   def rates(dimension=nil)
     dimension ? self.send("#{dimension}_rates") : rates_without_dimension
   end
@@ -84,24 +88,50 @@ module Letsrate
     end
 
     def letsrate_rateable(*dimensions)
-      has_many :rates_without_dimension, -> { where dimension: nil}, :as => :rateable, :class_name => "Rate", :dependent => :destroy
+      opts = dimensions.extract_options!
+      has_many :rates_without_dimension, :as => :rateable, :class_name => "Rate", :dependent => :destroy, :conditions => {:dimension => nil}
       has_many :raters_without_dimension, :through => :rates_without_dimension, :source => :rater
 
-      has_one :rate_average_without_dimension, -> { where dimension: nil}, :as => :cacheable,
-              :class_name => "RatingCache", :dependent => :destroy
+      has_one :rate_average_without_dimension, :as => :cacheable, :class_name => "RatingCache",
+              :dependent => :destroy, :conditions => {:dimension => nil}
 
 
       dimensions.each do |dimension|
-        has_many "#{dimension}_rates".to_sym, -> {where dimension: dimension.to_s},
-                                              :dependent => :destroy,
-                                              :class_name => "Rate",
-                                              :as => :rateable
+        has_many "#{dimension}_rates".to_sym, :dependent => :destroy,
+                  :conditions => {:dimension => dimension.to_s},
+                  :class_name => "Rate",
+                  :as => :rateable
 
         has_many "#{dimension}_raters".to_sym, :through => "#{dimension}_rates", :source => :rater
 
-        has_one "#{dimension}_average".to_sym, -> { where dimension: dimension.to_s },
-                                              :as => :cacheable, :class_name => "RatingCache",
-                                              :dependent => :destroy
+        has_one "#{dimension}_average", :as => :cacheable, :class_name => "RatingCache",
+                    :dependent => :destroy, :conditions => {:dimension => dimension.to_s}
+      end
+
+      if opts[:can_change]
+        class_eval <<-RUBY, __FILE__, __LINE__+1
+            def rate(stars, user, dimension=nil, dirichlet_method=false)
+              dimension = nil if dimension.blank?
+
+              if has_rate? user, dimension
+                user.ratings_given.where(dimension: dimension, rateable_id: id, rateable_type: self.class.name).first.update_attribute(:stars,stars)
+              else
+                rates(dimension).create! do |r|
+                  r.stars = stars
+                  r.rater = user
+                end
+              end
+              if dirichlet_method
+                update_rate_average_dirichlet(stars, dimension)
+              else
+                update_rate_average(stars, dimension)
+              end
+            end
+
+            def can_rate?(user, dimension=nil)
+              true
+            end
+        RUBY
       end
     end
   end

@@ -57,6 +57,13 @@ class Car < ActiveRecord::Base
   letsrate_rateable "speed", "engine", "price"
 end
 ```
+Set :can_change option if you want to allow users to change their ratings
+
+```ruby
+class Car < ActiveRecord::Base
+  letsrate_rateable "speed", "engine", "price", :can_change => true
+end
+```
 
 Then you need to add a call letsrate_rater in the user model.
 
@@ -93,6 +100,12 @@ You can use the rating_for_user helper method to show the star rating for the us
 Speed : <%= rating_for_user @car, current_user, "speed", :star => 10 %>
 ```
 
+Use :readonly option if you need only show rating, without ability to set rating
+
+```erb
+Speed : <%= rating_for @car, "speed", :readonly => true %>
+Speed : <%= rating_for_user @car, current_user, "speed", :readonly => true %>
+```
 
 ## Feedback
 If you find bugs please open a ticket at [https://github.com/muratguzel/letsrate/issues](https://github.com/muratguzel/letsrate/issues)
