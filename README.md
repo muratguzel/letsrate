@@ -86,6 +86,12 @@ Run the migrations:
 rake db:migrate
 ```
 
+### Javascript include
+```
+//= require jquery.raty
+//= require ratyrate
+```
+
 ### Prepare
 
 I suppose you have a car model
