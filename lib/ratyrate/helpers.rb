@@ -73,7 +73,7 @@ module Helpers
     #TODO: add option to change the star icon
     overall_avg = rateable_obj.overall_avg(user)
 
-    content_tag :div, '', :style => "background-image:url('#{image_path('/assets/big-star.png')}');width:81px;height:81px;margin-top:10px;" do
+    content_tag :div, '', :style => "background-image:url('#{image_path('big-star.png')}');width:81px;height:81px;margin-top:10px;" do
         content_tag :p, overall_avg, :style => "position:relative;line-height:85px;text-align:center;"
     end
   end
