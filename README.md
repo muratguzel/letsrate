@@ -9,7 +9,7 @@ A Ruby Gem that wrap the functionality of [jQuery Raty](https://github.com/wbote
 [![License](http://img.shields.io/license/MIT.png?color=green)](http://opensource.org/licenses/MIT)
 [![Support jQuery Raty](http://img.shields.io/gittip/wbotelhos.svg)](https://www.gittip.com/wazery "Git Tip")
 [![Stories in Ready](https://badge.waffle.io/wazery/ratyrate.png?label=ready&title=Ready)](https://waffle.io/wazery/ratyrate)
-[![raty_ratings API Documentation](https://www.omniref.com/ruby/gems/raty_ratings.png)](https://www.omniref.com/ruby/gems/raty_ratings)
+[![wazery/ratyrate API Documentation](https://www.omniref.com/github/wazery/ratyrate.png)](https://www.omniref.com/github/wazery/ratyrate)
 
 ## Repository
 
