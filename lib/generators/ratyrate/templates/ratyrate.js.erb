@@ -41,6 +41,7 @@ function initstars(){
       click: function(score, evt) {
         var _this = this;
         if (score == null) { score = 0; }
+        $(this).trigger('rated', score)
         $.post('<%= Rails.application.class.routes.url_helpers.rate_path %>',
         {
           score: score,
