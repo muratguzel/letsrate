@@ -122,8 +122,8 @@ module Ratyrate
       has_many :rates_without_dimension, -> { where dimension: nil}, as: :rateable, class_name: 'Rate', dependent: :destroy
       has_many :raters_without_dimension, through: :rates_without_dimension, source: :rater
 
-      has_one :rate_average_without_dimension, -> { where dimension: nil}, :as => :cacheable,
-              :class_name => "RatingCache", :dependent => :destroy
+      has_one :rate_average_without_dimension, -> { where dimension: nil}, as: :cacheable,
+              class_name: 'RatingCache', dependent: :destroy
 
       dimensions.each do |dimension|
         has_many "#{dimension}_rates".to_sym, -> {where dimension: dimension.to_s},
