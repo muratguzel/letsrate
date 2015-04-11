@@ -10,6 +10,8 @@ Provides the best way to add rating capabilites to your Rails application with j
 
 This gem will be updated on very early 2015  with many features. :) You can send me a message if you want to be a part of it. 
 
+Their is an active fork for now you can check it at http://github.com/wazery/ratyrate/, the maintainer of it will push its new code here soon.
+
 ## Instructions
 
 ### Install
