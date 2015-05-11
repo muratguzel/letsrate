@@ -208,3 +208,7 @@ In other words: `Major.Minor.Patch`.
 ## Feedback
 If you find bugs please open a ticket at [https://github.com/wazery/ratyrate/issues](https://github.com/wazery/ratyrate/issues)
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/wazery/ratyrate/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
