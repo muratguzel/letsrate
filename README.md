@@ -66,6 +66,36 @@ class User < ActiveRecord::Base
 end
 ```
 
+### Caching
+
+Add the cache column/columns to the model (for rating with dimensions)
+```
+rails g migration AddRatingAveragesToCars
+```
+
+```ruby
+class AddRatingAveragesToCars < ActiveRecord::Migration
+  def change
+    add_column :cars, :speed_rating_average, :float, :default => 0
+    add_column :cars, :engine_rating_average, :float, :default => 0
+    add_column :cars, :price_rating_average, :float, :default => 0
+  end
+end
+```
+
+Add the cache column to the model (for rating without dimension)
+```
+rails g migration AddRatingAverageToCars
+```
+
+```ruby
+class AddRatingAverageToCars < ActiveRecord::Migration
+  def change
+    add_column :cars, :rating_average, :float, :default => 0
+  end
+end
+```
+
 ### Using
 
 There is a helper method which name is rating_for to add the star links. By default rating_for will display the average rating and accept the

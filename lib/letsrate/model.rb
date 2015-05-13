@@ -42,9 +42,13 @@ module Letsrate
       a.avg = davg
       a.save!(validate: false)
     end
+
+    cache_column_name = dimension ? "#{dimension}_rating_average" : "rating_average"
+    self.update_attribute cache_column_name.to_sym, davg
   end
 
   def update_rate_average(stars, dimension=nil)
+    cache_column_name = dimension ? "#{dimension}_rating_average" : "rating_average"
     if average(dimension).nil?
       RatingCache.create! do |avg|
         avg.cacheable_id = self.id
@@ -53,12 +57,14 @@ module Letsrate
         avg.qty = 1
         avg.dimension = dimension
       end
+      self.update_attribute cache_column_name.to_sym, stars
     else
       a = average(dimension)
       a.qty = rates(dimension).count
       a.avg = rates(dimension).average(:stars)
       a.save!(validate: false)
     end
+    self.update_attribute cache_column_name.to_sym, a.avg
   end
 
   def average(dimension=nil)
