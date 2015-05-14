@@ -25,7 +25,7 @@ module Helpers
     targetType   = options[:targetType]   || 'hint'
     targetFormat = options[:targetFormat] || '{score}'
     targetScore  = options[:targetScore]  || ''
-    readOnly  = options[:readonly]  || false
+    readOnly     = options.delete(:readonly){ false }
 
     disable_after_rate = options[:disable_after_rate] && true
     disable_after_rate = true if disable_after_rate == nil
