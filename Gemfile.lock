@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ratyrate (1.2.0.alpha)
+    ratyrate (1.2.2.alpha)
 
 GEM
   remote: http://rubygems.org/
