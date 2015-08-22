@@ -134,9 +134,9 @@ Price  : <%= rating_for @car, "price" %>
 
 1- If you need to change the star number, you should use star option like below.
 ```erb
-Speed : <%= rating_for @car, "speed", :star => 10 %>
-Speed : <%= rating_for @car, "engine", :star => 7 %>
-Speed : <%= rating_for @car, "price" %>
+Speed  : <%= rating_for @car, "speed", :star => 10 %>
+Engine : <%= rating_for @car, "engine", :star => 7 %>
+Price  : <%= rating_for @car, "price" %>
 ```
 2- If you want to disable/enable the rating after user's first rate use the new option *disable_after_rate*
 ```erb
