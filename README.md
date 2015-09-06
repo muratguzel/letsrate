@@ -29,6 +29,13 @@ rails g letsrate User
 The generator takes one argument which is the name of your existing devise user model UserModelName. This is necessary to bind the user and rating datas.
 Also the generator copies necessary files (jquery raty plugin files, star icons and javascripts)
 
+Add js files to application.js
+
+```
+//= require jquery.raty
+//= require letsrate
+```
+
 Example:
 
 Suppose you will have a devise user model which name is User. The devise generator and letsrate generator should be like below
