@@ -42,7 +42,7 @@ module Helpers
       end
     else
       content_tag :div, '', "data-dimension" => dimension, :class => "star", "data-rating" => avg,
-                  "data-id" => rateable_obj.id, "data-classname" => rateable_obj.class.name,
+                  "data-id" => rateable_obj.id, "data-classname" => rateable_obj.class.name == rateable_obj.class.base_class.name ? rateable_obj.class.name : rateable_obj.class.base_class.name,
                   "data-disable-after-rate" => disable_after_rate,
                   "data-readonly" => readOnly,
                   "data-enable-half" => enable_half,
@@ -114,7 +114,7 @@ module Helpers
     end
 
     content_tag :div, '', "data-dimension" => dimension, :class => "star", "data-rating" => stars,
-                "data-id" => rateable_obj.id, "data-classname" => rateable_obj.class.name,
+                "data-id" => rateable_obj.id, "data-classname" => rateable_obj.class.name == rateable_obj.class.base_class.name ? rateable_obj.class.name : rateable_obj.class.base_class.name,
                 "data-disable-after-rate" => disable_after_rate,
                 "data-readonly" => readonly,
                 "data-enable-half" => enable_half,
