@@ -25,15 +25,17 @@ module Helpers
     targetType   = options[:targetType]   || 'hint'
     targetFormat = options[:targetFormat] || '{score}'
     targetScore  = options[:targetScore]  || ''
-    readOnly     = options.delete(:readonly){ false }
+    readonly     = options[:readonly]     || false
 
     disable_after_rate = options[:disable_after_rate] && true
     disable_after_rate = true if disable_after_rate == nil
 
-    if disable_after_rate
-      readonly = !(current_user && rateable_obj.can_rate?(current_user, dimension))
-    else
-      readonly = !current_user || false
+    if !readonly
+      if disable_after_rate
+        readonly = !(current_user && rateable_obj.can_rate?(current_user, dimension))
+      else
+        readonly = !current_user || false
+      end
     end
 
     if options[:imdb_avg] && readonly
@@ -44,7 +46,7 @@ module Helpers
       content_tag :div, '', "data-dimension" => dimension, :class => "star", "data-rating" => avg,
                   "data-id" => rateable_obj.id, "data-classname" => rateable_obj.class.name == rateable_obj.class.base_class.name ? rateable_obj.class.name : rateable_obj.class.base_class.name,
                   "data-disable-after-rate" => disable_after_rate,
-                  "data-readonly" => readOnly,
+                  "data-readonly" => readonly,
                   "data-enable-half" => enable_half,
                   "data-half-show" => half_show,
                   "data-star-count" => star,
@@ -105,10 +107,10 @@ module Helpers
     targetType   = options[:targetType]   || 'hint'
     targetFormat = options[:targetFormat] || '{score}'
     targetScore  = options[:targetScore]  || ''
+    readonly     = options[:readonly]    || false
 
     disable_after_rate = options[:disable_after_rate] || false
 
-    readonly=false
     if disable_after_rate
       readonly = rating_user.present? ? !rateable_obj.can_rate?(rating_user, dimension) : true
     end
