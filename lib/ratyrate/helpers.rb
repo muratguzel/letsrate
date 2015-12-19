@@ -25,20 +25,20 @@ module Helpers
     targetType   = options[:targetType]   || 'hint'
     targetFormat = options[:targetFormat] || '{score}'
     targetScore  = options[:targetScore]  || ''
-    readonly     = options[:readonly]     || false
+    readOnly     = options[:readonly]     || false
 
     disable_after_rate = options[:disable_after_rate] && true
     disable_after_rate = true if disable_after_rate == nil
 
-    if !readonly
+    unless readOnly
       if disable_after_rate
-        readonly = !(current_user && rateable_obj.can_rate?(current_user, dimension))
+        readOnly = !(current_user && rateable_obj.can_rate?(current_user, dimension))
       else
-        readonly = !current_user || false
+        readOnly = !current_user || false
       end
     end
 
-    if options[:imdb_avg] && readonly
+    if options[:imdb_avg] && readOnly
       content_tag :div, '', :style => "background-image:url('#{image_path('mid-star.png')}');width:61px;height:57px;margin-top:10px;" do
           content_tag :p, avg, :style => "position:relative;font-size:.8rem;text-align:center;line-height:60px;"
       end
@@ -46,7 +46,7 @@ module Helpers
       content_tag :div, '', "data-dimension" => dimension, :class => "star", "data-rating" => avg,
                   "data-id" => rateable_obj.id, "data-classname" => rateable_obj.class.name == rateable_obj.class.base_class.name ? rateable_obj.class.name : rateable_obj.class.base_class.name,
                   "data-disable-after-rate" => disable_after_rate,
-                  "data-readonly" => readonly,
+                  "data-readonly" => readOnly,
                   "data-enable-half" => enable_half,
                   "data-half-show" => half_show,
                   "data-star-count" => star,
@@ -107,18 +107,18 @@ module Helpers
     targetType   = options[:targetType]   || 'hint'
     targetFormat = options[:targetFormat] || '{score}'
     targetScore  = options[:targetScore]  || ''
-    readonly     = options[:readonly]    || false
+    readOnly     = options[:readonly]     || false
 
     disable_after_rate = options[:disable_after_rate] || false
 
     if disable_after_rate
-      readonly = rating_user.present? ? !rateable_obj.can_rate?(rating_user, dimension) : true
+      readOnly = rating_user.present? ? !rateable_obj.can_rate?(rating_user, dimension) : true
     end
 
     content_tag :div, '', "data-dimension" => dimension, :class => "star", "data-rating" => stars,
                 "data-id" => rateable_obj.id, "data-classname" => rateable_obj.class.name == rateable_obj.class.base_class.name ? rateable_obj.class.name : rateable_obj.class.base_class.name,
                 "data-disable-after-rate" => disable_after_rate,
-                "data-readonly" => readonly,
+                "data-readonly" => readOnly,
                 "data-enable-half" => enable_half,
                 "data-half-show" => half_show,
                 "data-star-count" => star,
