@@ -83,8 +83,8 @@ If you need to change the star number, you should use star option like below.
 
 ```erb
 Speed : <%= rating_for @car, "speed", :star => 10 %>
-Speed : <%= rating_for @car, "engine", :star => 7 %>
-Speed : <%= rating_for @car, "price" %>
+Engine : <%= rating_for @car, "engine", :star => 7 %>
+Price : <%= rating_for @car, "price" %>
 ```
 
 You can use the rating_for_user helper method to show the star rating for the user.
