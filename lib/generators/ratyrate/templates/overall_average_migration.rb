@@ -6,6 +6,8 @@ class CreateOverallAverages < ActiveRecord::Migration
       t.float :overall_avg, :null => false
       t.timestamps
     end
+
+    add_index :overall_averages, [:rateable_id, :rateable_type]
   end
 
   def self.down
