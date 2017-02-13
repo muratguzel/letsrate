@@ -57,7 +57,7 @@ module Letsrate
       a = average(dimension)
       a.qty = rates(dimension).count
       a.avg = rates(dimension).average(:stars)
-      a.save!(validate: false)
+      a.save!(:validate => false)
     end
   end
 
@@ -66,7 +66,7 @@ module Letsrate
   end
 
   def can_rate?(user, dimension=nil)
-    user.ratings_given.where(dimension: dimension, rateable_id: id, rateable_type: self.class.name).size.zero?
+    user.ratings_given.where(:dimension => dimension, :rateable_id => id, :rateable_type => self.class.name).size.zero?
   end
 
   def rates(dimension=nil)

@@ -35,7 +35,7 @@ module Helpers
                 "data-id" => rateable_obj.id, "data-classname" => rateable_obj.class.name,
                 "data-disable-after-rate" => disable_after_rate,
                 "data-readonly" => readonly,
-                "data-star-count" => stars
+                "data-star-count" => options[:star] || 5
   end
 
 end
