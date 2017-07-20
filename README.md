@@ -9,7 +9,7 @@ A Ruby Gem that wrap the functionality of [jQuery Raty](https://github.com/wbote
 [![License](http://img.shields.io/license/MIT.png?color=green)](http://opensource.org/licenses/MIT)
 [![Support jQuery Raty](http://img.shields.io/gittip/wbotelhos.svg)](https://www.gittip.com/wazery "Git Tip")
 [![Stories in Ready](https://badge.waffle.io/wazery/ratyrate.png?label=ready&title=Ready)](https://waffle.io/wazery/ratyrate)
-[![wazery/ratyrate API Documentation](https://www.omniref.com/github/wazery/ratyrate.png)](https://www.omniref.com/github/wazery/ratyrate)
+[![Code Triagers Badge](https://www.codetriage.com/wazery/ratyrate/badges/users.svg)](https://www.codetriage.com/wazery/ratyrate)
 
 ## Repository
 
@@ -40,7 +40,7 @@ This is a fork against the repository [muratguzel/letsrate](https://github.com/m
 
 ## Detailed view of the new features
 
-![Detailed view of the new featurews](https://dl.dropboxusercontent.com/u/71605080/RatyRate%20Features.png)
+![Detailed view of the new featurews](http://i.imgur.com/m6n25ZF.png)
 
 ## Complete tutorial for this Gem on SitePoint - Ruby
 
@@ -207,5 +207,3 @@ In other words: `Major.Minor.Patch`.
 
 ## Feedback
 If you find bugs please open a ticket at [https://github.com/wazery/ratyrate/issues](https://github.com/wazery/ratyrate/issues)
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/wazery/ratyrate/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
