@@ -83,7 +83,7 @@ module Helpers
   def rating_for_user(rateable_obj, rating_user, dimension = nil, options = {})
     @object = rateable_obj
     @user   = rating_user
-	  @rating = Rate.find_by_rater_id_and_rateable_id_and_dimension(@user.id, @object.id, dimension)
+	  @rating = Rate.find_by rater: @user, rateable: @object, dimension: dimension
 	  stars = @rating ? @rating.stars : 0
 
     star         = options[:star]         || 5
